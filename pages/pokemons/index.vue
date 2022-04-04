@@ -36,17 +36,21 @@
       <v-card>
         <v-card-title>
           {{ pokemons.name }}
+          <v-img
+            :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+              index + 1
+            }.png`"
+          ></v-img>
         </v-card-title>
 
         <v-card-text>Peso: {{ pokemons.weight }} </v-card-text
         ><v-card-text>
-          {{ abilities(pokemons.abilities) }}
-          <!-- <v-list v-for="(pokemons, index) in abilities" :key="index">
-            <v-list-item>{{ pokemons.ability.name }}</v-list-item>
-          </v-list> --> </v-card-text
+          <!-- {{ abilities(pokemons.abilities) }} -->
+          <v-list v-for="(pokemons, index) in abilities" :key="index">
+            <v-list-item>Habilidades: {{ pokemons.ability.name }}</v-list-item>
+          </v-list> </v-card-text
         ><v-card-text
           >Status:
-
           {{ pokemons.stats }}
         </v-card-text>
         <v-card-text>
@@ -76,11 +80,11 @@ export default Vue.extend({
     pokemon(): Array<Pokemons> {
       return this.$store.state.pokemons.pokemons as Array<Pokemons>;
     },
-  },
-  methods: {
-    abilities(pokemons: Pokemons): any {
+    abilities(): any {
       return this.pokemons.abilities;
     },
+  },
+  methods: {
     getPokemons(): void {
       this.$store.dispatch("pokemons/getAll");
     },
