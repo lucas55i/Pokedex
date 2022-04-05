@@ -26,6 +26,11 @@ export default {
           title: "Pokedex",
           to: "/pokemons",
         },
+        {
+          icon: "mdi-apps",
+          title: "Pokedex",
+          to: "/home",
+        },
       ],
       miniVariant: false,
       right: true,
