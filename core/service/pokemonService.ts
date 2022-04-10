@@ -3,7 +3,7 @@ import { Pokemons, Pokemon } from "../models/pokemon";
 
 class PokemonService {
     getAll(): Promise<Pokemons[]> {
-        return httpClient.get('/pokemon')
+        return httpClient.get('pokemon')
     }
     getDetailPokemon(pokemonName: string): Promise<Pokemon[]> {
         return httpClient.get('/pokemon/' + pokemonName)

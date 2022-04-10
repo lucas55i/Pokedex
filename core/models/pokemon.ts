@@ -2,8 +2,13 @@ export interface Pokemons {
     next: string;
     count: number;
     result: Pokemons[];
-
+    paginator: Paginator
 }
+export interface Paginator {
+    offset: number
+    limit: number
+}
+
 
 export interface Pokemon {
     name: string;
@@ -25,6 +30,7 @@ export interface Ability {
 
 export interface Staties {
     base_stat: number
+
     stat: Stat
 }
 export interface Stat {

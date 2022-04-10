@@ -1,4 +1,4 @@
-import { Pokemons } from "~/core/models/pokemon";
+import { Paginator, Pokemons } from "~/core/models/pokemon";
 import { pokemonService } from "~/core/service/pokemonService";
 
 interface UserState {
@@ -16,7 +16,7 @@ export const mutations = {
 };
 
 export const actions = {
-    getAll(context: any) {
+    getAll(context: any, pokemon: Paginator) {
         context.commit("setPokemons", []);
         pokemonService
             .getAll()

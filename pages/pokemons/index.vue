@@ -1,33 +1,28 @@
 <template>
   <v-container>
+    <div class="text-center">
+      <v-pagination :length="6"></v-pagination>
+    </div>
     <v-col>
       <v-row>
         <v-card
+          @click="getPokemon(pokemons.name), (dialog = true)"
           class="mx-auto my-12"
           width="250"
           v-for="(pokemons, index) in pokemon.results"
           :key="pokemons.results"
         >
-          <v-img
-            :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-              index + 1
-            }.png`"
-          ></v-img>
+          <div class="zoom">
+            <v-img
+              :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+                index + 1
+              }.png`"
+            ></v-img>
+          </div>
 
           <v-card-title> {{ pokemons.name }} </v-card-title>
 
           <v-divider class="mx-4"></v-divider>
-
-          <v-card-actions>
-            <v-btn
-              icon
-              color="red lighten-2"
-              dark
-              @click="getPokemon(pokemons.name), (dialog = true)"
-            >
-              <v-icon>mdi-plus</v-icon>
-            </v-btn>
-          </v-card-actions>
         </v-card>
       </v-row>
     </v-col>
@@ -37,11 +32,20 @@
         <v-card-title>
           {{ pokemons.name }}
         </v-card-title>
+        <v-divider class="mx-4"></v-divider>
+
+        <v-card-text align="center">
+          <v-img
+            max-height="250"
+            max-width="250"
+            :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemons.id}.png`"
+          ></v-img>
+        </v-card-text>
 
         <v-card-text>Peso: {{ pokemons.weight }} </v-card-text>
         <v-tabs v-model="tab" centered icons-and-text>
           <v-tab> Habilidades </v-tab>
-          <v-tab> Evoluções </v-tab>
+          <v-tab> Status </v-tab>
         </v-tabs>
         <br />
 
@@ -52,9 +56,9 @@
             </v-card-text>
           </v-tab-item>
 
-          <v-tab-item key="status">
+          <v-tab-item key="base">
             <v-simple-table>
-              <template v-slot:default>
+              <template>
                 <thead>
                   <tr>
                     <th class="text-left"></th>
@@ -62,21 +66,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(status, index) in status" :key="index">
-                    <td>{{ status }}</td>
-                    <td>
-                      <v-progress-linear rounded color="teal" height="11">
+                  <tr v-for="(stats, index) in stats" :key="index">
+                    <td class="loading">
+                      {{ stats.stat.name }} - {{ stats.base_stat }}
+                      <v-progress-linear color="teal" :value="stats.base_stat">
                       </v-progress-linear>
                     </td>
                   </tr>
                 </tbody>
               </template>
             </v-simple-table>
-            <v-card-text> </v-card-text>
           </v-tab-item>
         </v-tabs-items>
 
-        <v-card-text> </v-card-text>
         <v-card-text> </v-card-text>
 
         <v-divider></v-divider>
@@ -96,6 +98,8 @@ export default Vue.extend({
   },
   data() {
     return {
+      pageNumber: 1,
+      pageSize: 10,
       dialog: false,
       pokemons: {} as Pokemon,
       value: 10,
@@ -105,7 +109,7 @@ export default Vue.extend({
           name: "abilities",
         },
         1: {
-          name: "status",
+          name: "base",
         },
       },
 
@@ -140,3 +144,19 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style>
+.loading {
+  padding: 10px;
+}
+.zoom {
+  transition: transform 0.2s; /* Animation */
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(
+    1.1
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+</style>
