@@ -90,12 +90,8 @@
 <script lang="ts">
 import Vue from "vue";
 import { Pokemons, Pokemon, Abilities } from "~/core/models/pokemon";
-import InfoPokemon from "~/components/info.vue";
 
 export default Vue.extend({
-  components: {
-    "info-pokemon": InfoPokemon,
-  },
   data() {
     return {
       pageNumber: 1,

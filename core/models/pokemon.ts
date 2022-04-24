@@ -9,7 +9,6 @@ export interface Paginator {
     limit: number
 }
 
-
 export interface Pokemon {
     name: string;
     weight: number
@@ -27,20 +26,16 @@ export interface Ability {
     url: string;
 }
 
-
 export interface Staties {
     base_stat: number
-
     stat: Stat
 }
 export interface Stat {
     name: string
 }
 
-
 export interface Types {
     type: Type
 }export interface Type {
     name: string;
-
 }
