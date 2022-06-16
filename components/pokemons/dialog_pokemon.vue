@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-btn @click="getPokemon(pokemons.name), (dialog = true)"> </v-btn>
+    <v-btn @click="getPokemon(pokemons.name), (dialog = true)" icon>
+      <v-icon dark> mdi-information-outline </v-icon>
+    </v-btn>
     <v-dialog v-model="dialog" width="500">
       <v-card>
         <v-card-title>
@@ -65,11 +67,11 @@ export default Vue.extend({
     pokemons: {
       type: Object,
       required: true,
-    } as PropOptions,
+    },
   },
   data() {
     return {
-        pokemons: {} as Pokemon,
+      pokemon: {} as Pokemon,
       value: 10,
       tab: null,
       dialog: false,
@@ -96,21 +98,12 @@ export default Vue.extend({
   },
   methods: {
     async getPokemon(pokemonsName: Pokemon) {
-     this.pokemons = (await this.$store.dispatch(
+       this.pokemons = (await this.$store.dispatch(
         "pokemons/getPokemon",
         pokemonsName
       )) as Pokemon;
     },
-    getTypesImage(source: string): string {
-      const sourcesImages: any = {
-        grass: "/img/grass.jpg",
-      };
-      return sourcesImages[source];
-    },
   },
-  //   created() {
-  //     this.getPokemons();
-  //   },
 });
 </script>
 
