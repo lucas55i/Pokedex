@@ -18,11 +18,7 @@ export default {
       drawer: false,
       fixed: false,
       items: [
-        {
-          icon: "mdi-apps",
-          title: "Pokedex",
-          to: "/pokemons",
-        }
+        
        
       ],
       miniVariant: false,
