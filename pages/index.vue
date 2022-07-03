@@ -64,13 +64,15 @@
                     <td>{{ stats.stat.name }}</td>
                     <td width="300">
                       <v-progress-linear
+                        class="progressBar"
                         height="10"
-                        color="teal"
+                        color="blue accent-4"
                         :value="stats.base_stat"
                       >
                       </v-progress-linear>
                     </td>
                   </tr>
+                
                 </tbody>
               </template>
             </v-simple-table>
@@ -129,11 +131,11 @@ export default Vue.extend({
         pokemonsName
       )) as Pokemon;
     },
-     getTypesImage(source: string): string {
+    getTypesImage(source: string): string {
       const sourcesImages: any = {
-        grass: '/img/grass.jpg',
-      }
-      return sourcesImages[source]
+        grass: "/img/grass.jpg",
+      };
+      return sourcesImages[source];
     },
   },
   created() {
@@ -143,6 +145,12 @@ export default Vue.extend({
 </script>
 
 <style>
+.progressBar {
+ border-radius: 20px;
+ color: blanchedalmond
+  
+}
+
 .loading {
   padding: 10px;
 }
